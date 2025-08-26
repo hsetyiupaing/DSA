@@ -1,24 +1,24 @@
-package main;
+package arrays;
 
 import java.util.Scanner;
 
-public class Queue {
+public class CircularQueue {
 	Scanner s;
 	int myQueue[] ;
 	int rear;
 	int front;
-	Queue(){
+	CircularQueue(){
 		this.s = new Scanner(System.in);
 		this.myQueue = new int[6];
-		this.rear = -1;
-		this.front = -1;
+		this.rear = 0;
+		this.front = 0;
 	}
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		//Main menu
 		int choice;
-		Queue queue = new Queue();
+		CircularQueue queue = new CircularQueue();
 		do {
 			System.out.println("Queue Operations");
 			System.out.println("1. Insert");
@@ -30,9 +30,9 @@ public class Queue {
 			choice = queue.readChoice();
 			switch(choice) {
 				case 1: queue.insert();break;
-				case 2: queue.adjustedDelete();break;
+				case 2: queue.delete();break;
 				case 3: queue.display();break;
-				case 4: System.out.println("Bye!");break;
+				case 4: System.out.println("Bye!");System.exit(0);break;
 				default: System.err.println("Invalid Operation, Try Again!");break;
 			}
 			
@@ -46,11 +46,11 @@ public class Queue {
 	
 	void insert() {
 		//To insert an element
-		if(rear == 5) {
+		if((rear + 1)%6 == front) {
 			System.err.println("Queue Overflowed, Cannot Insert an Element!");
 		}else {
+			rear= (rear + 1) % 6;
 			System.out.println("Input an Element to Insert: ");
-			rear++;
 			myQueue[rear] = s.nextInt();
 		}
 	}
@@ -60,21 +60,8 @@ public class Queue {
 		if(rear == front) {
 			System.err.println("Queue Underflowed, No Element to Delete!");
 		}else {
-			front ++;
+			front = (front + 1)%6;
 			System.out.println("Deleted Element is: " + myQueue[front]);
-		}
-	}
-	
-	void adjustedDelete() {
-		// To delete an element
-		if(rear == front) {
-			System.err.println("Queue Underflowed, No Element to Delete!");
-		}else {
-			System.out.println("Deleted Element is: " + myQueue[0]);
-			for(int i = 1; i <= rear; i++) {
-				myQueue[i-1] = myQueue[i];
-			}
-			rear --;
 		}
 	}
 	
@@ -83,8 +70,7 @@ public class Queue {
 		if(rear == front) {
 			System.err.println("Queue Empty, Nothing to Display!");
 		}else {
-			System.out.println("The elements in the queue are: ");
-			for(int i = front+1; i <= rear; i++) {
+			for(int i = (front + 1%6); i != (rear + 1 %6); i++) {
 				System.out.println(myQueue[i]);
 			}
 		}
