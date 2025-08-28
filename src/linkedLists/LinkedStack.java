@@ -1,4 +1,4 @@
-package linked_lists;
+package linkedLists;
 
 import java.util.Scanner;
 
@@ -36,7 +36,7 @@ public class LinkedStack {
 	                case 2 -> pop();
 	                case 3 -> display();
 	                case 4 -> {
-	                    System.out.println("Exiting program.");
+	                    System.out.println("Bye!");
 	                    System.exit(0);
 	                    return;
 	                }
@@ -45,7 +45,13 @@ public class LinkedStack {
 	        }
 	    }
 	 
-	void push() {
+	private void push() {
+		/* Pushing the element into stack
+		 * Create a temporary variable
+		 * assign data part
+		 * assign link part of top in link part of temp
+		 * assign temp in top
+		 */
 		System.out.println("Enter an Element to Push: ");
 		int data = s.nextInt();
 		Node temp = new Node(data);
@@ -53,7 +59,11 @@ public class LinkedStack {
 		top = temp;
 	}
 	
-	void pop() {
+	private void pop() {
+		/* Check the queue is empty
+		 * IF yes, display error message
+		 * IF no, assign top.link in top
+		 */
 		if(top == null) {
 			System.err.println("Stack Empty. No Elements to delete. ");
 		}else {
@@ -61,11 +71,19 @@ public class LinkedStack {
 			top = top.link;
 		}
 	}
-	void display() {
+	private void display() {
+		/*Check if the Stack is empty
+		 * IF yes, display error message
+		 * IF no, create a temp variable
+		 * display temp.data
+		 * LOOP the process until temp == null
+		 */
 		if(top == null) {
 			System.err.println("Stack Empty! Nothing to display");
 		}else {
 			Node temp = top;
+			
+			System.out.println("The Elements in the Queue are:");
 			while(temp != null) {
 				System.out.println(temp.data);
 				temp = temp.link;
