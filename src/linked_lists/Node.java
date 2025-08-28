@@ -1,4 +1,4 @@
-package linkedStack;
+package linked_lists;
 
 public class Node {
 

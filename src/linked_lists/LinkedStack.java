@@ -1,4 +1,4 @@
-package linkedStack;
+package linked_lists;
 
 import java.util.Scanner;
 
@@ -37,6 +37,7 @@ public class LinkedStack {
 	                case 3 -> display();
 	                case 4 -> {
 	                    System.out.println("Exiting program.");
+	                    System.exit(0);
 	                    return;
 	                }
 	                default -> System.out.println("Invalid choice. Please try again.");
